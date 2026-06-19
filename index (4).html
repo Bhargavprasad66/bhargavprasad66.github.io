@@ -1,667 +1,606 @@
+
+cat > /mnt/user-data/outputs/portfolio_v2.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Munugala Bhargav Prasad — Data Analyst · SQL · Power BI · Python"/>
 <title>Bhargav Prasad — Data Analyst</title>
-<meta name="description" content="Portfolio of Munugala Bhargav Prasad, Data Analyst specializing in SQL, Power BI, and predictive analytics." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-  :root{
-    --ink:#0B0E14;
-    --surface:#141926;
-    --surface-2:#1B2230;
-    --paper:#F3F1EA;
-    --paper-dim:#A9AEBC;
-    --teal:#7FB8A6;
-    --amber:#E8A04C;
-    --slate:#4A5568;
-    --rule: rgba(243,241,234,0.10);
-    --max: 1080px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--ink);
-    color:var(--paper);
-    font-family:'Inter',sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;text-decoration:none;}
-  img{max-width:100%;display:block;}
+:root {
+  --bg: #030712;
+  --bg2: #060D1F;
+  --surface: #0D1427;
+  --surface2: #111B34;
+  --border: rgba(99,139,255,0.1);
+  --border2: rgba(99,139,255,0.2);
+  --text: #F8FAFF;
+  --muted: #6B7FA8;
+  --dim: #2D3A5C;
+  --accent: #4F7EFF;
+  --accent2: #7C5CFC;
+  --gold: #F5C842;
+  --cyan: #00D4FF;
+  --glow: rgba(79,126,255,0.15);
+  --glow2: rgba(124,92,252,0.1);
+  --font-d: 'Playfair Display', Georgia, serif;
+  --font-b: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-m: 'JetBrains Mono', monospace;
+  --r: 12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-  ::selection{background:var(--teal);color:var(--ink);}
+/* ── LIVE CANVAS BG ── */
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
-  }
+/* ── NOISE OVERLAY ── */
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4}
 
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,80px);height:68px;background:rgba(3,7,18,0.75);backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-m);font-size:0.82rem;color:var(--text);text-decoration:none;letter-spacing:0.06em;display:flex;align-items:center;gap:10px}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:blink 2.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 12px var(--accent)}50%{opacity:0.5;box-shadow:0 0 4px var(--accent)}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-btns{display:flex;gap:10px}
+.nav-btn{color:var(--muted);text-decoration:none;font-size:0.74rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:1px solid var(--border2);padding:7px 16px;border-radius:30px;transition:all .2s;font-family:var(--font-m)}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,126,255,0.08)}
 
-  /* ---------- NAV ---------- */
-  .nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(11,14,20,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--rule);
-  }
-  .nav-inner{
-    max-width:var(--max); margin:0 auto; padding:18px 28px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .nav-mark{
-    font-family:'JetBrains Mono',monospace;
-    font-size:13px; letter-spacing:0.06em;
-    color:var(--teal);
-    display:flex; align-items:center; gap:8px;
-  }
-  .nav-mark .dot{width:7px;height:7px;border-radius:50%;background:var(--amber); box-shadow:0 0 0 3px rgba(232,160,76,0.18);}
-  .nav-links{display:flex; gap:30px; font-family:'JetBrains Mono',monospace; font-size:13px;}
-  .nav-links a{color:var(--paper-dim); position:relative; padding:4px 0; transition:color .2s;}
-  .nav-links a:hover, .nav-links a:focus-visible{color:var(--paper);}
-  .nav-links a::after{
-    content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px;
-    background:var(--teal); transition:width .25s ease;
-  }
-  .nav-links a:hover::after, .nav-links a:focus-visible::after{width:100%;}
-  .nav-social{display:flex; gap:16px;}
-  .nav-social a{color:var(--paper-dim); transition:color .2s;}
-  .nav-social a:hover{color:var(--amber);}
-  .nav-social svg{width:18px;height:18px;}
+/* ── HERO ── */
+.hero{position:relative;z-index:10;min-height:96vh;display:grid;grid-template-rows:1fr auto;padding:clamp(90px,14vh,160px) clamp(20px,8vw,120px) 0}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-m);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:30px;padding:8px 18px;border:1px solid rgba(0,212,255,0.2);border-radius:30px;background:rgba(0,212,255,0.06);width:fit-content}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:blink 2s ease-in-out infinite}
+.hero h1{font-family:var(--font-d);font-size:clamp(3rem,9vw,8.5rem);line-height:0.92;letter-spacing:-0.02em;margin-bottom:36px;max-width:1100px}
+.h1-sub{display:block;color:var(--muted);font-size:clamp(1rem,2.5vw,2rem);font-weight:400;font-style:italic;letter-spacing:0;line-height:1.3;margin-top:12px}
+.hero-name{background:linear-gradient(135deg,#fff 0%,#a8c0ff 50%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{max-width:560px;color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:48px;font-weight:400}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:90px}
+.btn-p{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:15px 32px;border-radius:8px;font-weight:700;font-size:0.85rem;letter-spacing:0.05em;text-decoration:none;text-transform:uppercase;transition:all .25s;box-shadow:0 4px 30px rgba(79,126,255,0.35)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(79,126,255,0.5)}
+.btn-g{border:1px solid var(--border2);color:var(--muted);padding:14px 32px;border-radius:8px;font-weight:600;font-size:0.85rem;text-decoration:none;text-transform:uppercase;letter-spacing:0.05em;transition:all .2s}
+.btn-g:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,126,255,0.06)}
 
-  /* ---------- HERO ---------- */
-  .hero{
-    position:relative;
-    padding:96px 0 80px;
-    overflow:hidden;
-    border-bottom:1px solid var(--rule);
-  }
-  .trace-wrap{
-    position:absolute; inset:0; opacity:0.35; pointer-events:none;
-  }
-  #trace-path{
-    stroke:var(--teal);
-    stroke-width:1.5;
-    fill:none;
-    stroke-dasharray:1400;
-    stroke-dashoffset:1400;
-    animation:draw 2.6s ease-out forwards;
-  }
-  #trace-path-2{
-    stroke:var(--amber);
-    stroke-width:1;
-    fill:none;
-    stroke-dasharray:1400;
-    stroke-dashoffset:1400;
-    opacity:0.5;
-    animation:draw 2.6s ease-out .3s forwards;
-  }
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
+/* stats */
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border)}
+.stat{padding:28px 0;border-right:1px solid var(--border);position:relative;overflow:hidden;cursor:default}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .3s}
+.stat:hover::before{opacity:1}
+.stat:last-child{border-right:none}
+.stat-num{font-family:var(--font-d);font-size:2.8rem;font-style:italic;color:var(--text);line-height:1}
+.stat-lbl{font-family:var(--font-m);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-top:8px}
 
-  .hero-grid{
-    position:relative; z-index:1;
-    display:grid; grid-template-columns:1.3fr 0.9fr; gap:56px; align-items:end;
-  }
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace; font-size:12px;
-    color:var(--amber); letter-spacing:0.12em; text-transform:uppercase;
-    margin-bottom:18px; display:block;
-  }
-  h1.name{
-    font-family:'Fraunces',serif;
-    font-weight:600;
-    font-size:clamp(40px, 6vw, 68px);
-    line-height:1.04;
-    color:var(--paper);
-    margin-bottom:22px;
-  }
-  h1.name em{
-    font-style:italic; font-weight:500; color:var(--teal);
-  }
-  .hero-desc{
-    font-size:16.5px; color:var(--paper-dim); max-width:540px; margin-bottom:28px;
-  }
-  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
-  .btn{
-    font-family:'JetBrains Mono',monospace; font-size:13px;
-    padding:12px 22px; border-radius:3px;
-    border:1px solid var(--rule);
-    display:inline-flex; align-items:center; gap:8px;
-    transition:all .2s ease;
-  }
-  .btn-primary{background:var(--teal); color:var(--ink); border-color:var(--teal);}
-  .btn-primary:hover{background:#93c6b4;}
-  .btn-ghost{color:var(--paper);}
-  .btn-ghost:hover{border-color:var(--teal); color:var(--teal);}
+/* ── SECTIONS ── */
+.sec{padding:clamp(80px,12vh,130px) clamp(20px,8vw,120px);position:relative;z-index:10}
+.sec-eye{font-family:var(--font-m);font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.sec-eye::before{content:'';display:block;width:32px;height:1px;background:var(--accent)}
+.sec-ttl{font-family:var(--font-d);font-size:clamp(2rem,4.5vw,3.8rem);line-height:1.0;letter-spacing:-0.02em;margin-bottom:14px}
+.sec-ttl em{font-style:italic;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-sub{color:var(--muted);font-size:0.92rem;max-width:500px;line-height:1.75;margin-bottom:56px}
+.divider{border:none;border-top:1px solid var(--border);position:relative;z-index:10}
 
-  /* KPI panel */
-  .kpi-panel{
-    background:var(--surface);
-    border:1px solid var(--rule);
-    border-radius:6px;
-    padding:6px;
-  }
-  .kpi-panel-head{
-    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--paper-dim);
-    padding:12px 14px 10px; display:flex; align-items:center; gap:8px;
-    border-bottom:1px solid var(--rule);
-  }
-  .kpi-panel-head .lights{display:flex; gap:5px;}
-  .kpi-panel-head .lights span{width:6px;height:6px;border-radius:50%; background:var(--slate);}
-  .kpi-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule);}
-  .kpi-cell{background:var(--surface); padding:18px 16px;}
-  .kpi-num{
-    font-family:'Fraunces',serif; font-weight:600; font-size:30px; color:var(--paper);
-    line-height:1;
-  }
-  .kpi-num span{color:var(--teal); font-size:18px;}
-  .kpi-label{
-    font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--paper-dim);
-    text-transform:uppercase; letter-spacing:0.05em; margin-top:8px;
-  }
+/* ── ABOUT / PHOTO STRIP ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.about-photo{position:relative;overflow:hidden;min-height:460px}
+.about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75) saturate(0.85);transition:all .5s}
+.about-photo:hover img{filter:brightness(0.9) saturate(1);transform:scale(1.03)}
+.photo-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(3,7,18,0.5),transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:36px}
+.photo-tag{font-family:var(--font-m);font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.photo-name{font-family:var(--font-d);font-size:2rem;font-style:italic;color:#fff;line-height:1.1}
+.about-text{background:var(--surface);padding:48px}
+.about-text h3{font-family:var(--font-d);font-size:1.9rem;line-height:1.15;margin-bottom:20px;font-style:italic}
+.about-text p{color:var(--muted);font-size:0.92rem;line-height:1.8;margin-bottom:18px}
+.about-facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.fact{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px 18px}
+.fact-lbl{font-family:var(--font-m);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.fact-val{font-size:0.9rem;font-weight:600;color:var(--text)}
 
-  /* ---------- SECTION SHELL ---------- */
-  section{padding:88px 0;}
-  .section-head{margin-bottom:48px; display:flex; align-items:baseline; gap:18px;}
-  .section-num{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--slate);}
-  h2.section-title{
-    font-family:'Fraunces',serif; font-weight:600; font-size:clamp(28px,3.4vw,38px);
-    color:var(--paper);
-  }
-  .section-rule{flex:1; height:1px; background:var(--rule); margin-left:6px;}
-  .section-intro{color:var(--paper-dim); max-width:600px; margin-bottom:8px; font-size:15px;}
+/* ── IMPACT ── */
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.impact-card{background:var(--surface);padding:40px 32px;position:relative;overflow:hidden;transition:background .2s}
+.impact-card:hover{background:var(--surface2)}
+.impact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent)}
+.impact-num{font-family:var(--font-d);font-size:3.2rem;font-style:italic;line-height:1;margin-bottom:12px}
+.impact-num .hi{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.impact-desc{color:var(--muted);font-size:0.84rem;line-height:1.65}
 
-  /* ---------- PROJECTS ---------- */
-  .projects{border-top:1px solid var(--rule);}
-  .project-card{
-    display:grid; grid-template-columns:0.95fr 1.4fr; gap:40px;
-    padding:36px 0; border-bottom:1px solid var(--rule);
-    align-items:start;
-  }
-  .project-card:last-child{border-bottom:none;}
-  .project-visual{
-    background:var(--surface);
-    border:1px solid var(--rule);
-    border-radius:6px;
-    aspect-ratio:4/3;
-    display:flex; align-items:center; justify-content:center;
-    overflow:hidden;
-    position:relative;
-  }
-  .project-visual svg{width:70%; height:70%;}
-  .dataset-tag{
-    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--teal);
-    background:rgba(127,184,166,0.1); border:1px solid rgba(127,184,166,0.3);
-    padding:4px 10px; border-radius:3px; display:inline-block; margin-bottom:14px;
-  }
-  .featured-tag{
-    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--amber);
-    background:rgba(232,160,76,0.1); border:1px solid rgba(232,160,76,0.35);
-    padding:4px 10px; border-radius:3px; display:inline-block; margin-bottom:14px; margin-left:8px;
-  }
-  .project-card h3{
-    font-family:'Fraunces',serif; font-weight:600; font-size:24px; color:var(--paper);
-    margin-bottom:12px;
-  }
-  .project-card p{color:var(--paper-dim); font-size:14.5px; margin-bottom:16px;}
-  .project-card p + p{margin-top:-6px;}
-  .stack-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;}
-  .stack-chip{
-    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--paper-dim);
-    border:1px solid var(--rule); padding:4px 10px; border-radius:20px;
-  }
-  .outcome-line{
-    display:flex; gap:10px; align-items:baseline; margin-bottom:6px;
-    font-size:13.5px; color:var(--paper);
-  }
-  .outcome-line .mark{color:var(--amber); font-family:'JetBrains Mono',monospace;}
-  .project-link{
-    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--teal);
-    display:inline-flex; align-items:center; gap:6px; margin-top:8px;
-    border-bottom:1px solid transparent; transition:border-color .2s;
-  }
-  .project-link:hover{border-color:var(--teal);}
+/* ── PROJECTS ── */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.proj-card{background:var(--surface);overflow:hidden;display:flex;flex-direction:column;transition:background .25s}
+.proj-card:hover{background:var(--surface2)}
+.proj-card.feat{grid-column:1/-1;flex-direction:row}
+.proj-card.full{grid-column:1/-1}
+.full-row{display:flex;flex-direction:row}
+.card-img{overflow:hidden;background:var(--surface2);flex-shrink:0;position:relative}
+.proj-card:not(.feat):not(.full) .card-img{height:220px;width:100%}
+.proj-card.feat .card-img{width:480px;height:auto;min-height:380px}
+.full-row .card-img{width:480px;height:auto;min-height:380px}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.65) saturate(0.75);transition:all .5s}
+.proj-card:hover .card-img img{filter:brightness(0.85) saturate(1);transform:scale(1.05)}
+.card-body{padding:36px;display:flex;flex-direction:column;flex:1}
+.card-lbl{font-family:var(--font-m);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.c-badge{padding:3px 10px;border-radius:20px;font-size:0.58rem;border:1px solid}
+.c-blue{background:rgba(79,126,255,0.1);color:#7BA7FF;border-color:rgba(79,126,255,0.25)}
+.c-gold{background:rgba(245,200,66,0.1);color:var(--gold);border-color:rgba(245,200,66,0.25)}
+.card-body h3{font-family:var(--font-d);font-size:1.55rem;line-height:1.2;margin-bottom:14px;font-style:italic}
+.proj-card.feat .card-body h3,.full-row .card-body h3{font-size:2.1rem}
+.card-desc{color:var(--muted);font-size:0.86rem;line-height:1.7;flex:1;margin-bottom:22px}
+.card-bullets{list-style:none;margin-bottom:24px}
+.card-bullets li{font-size:0.82rem;color:var(--muted);padding:7px 0 7px 20px;position:relative;border-top:1px solid var(--border);transition:color .2s}
+.card-bullets li:hover{color:var(--text)}
+.card-bullets li::before{content:'▸';position:absolute;left:0;top:9px;color:var(--accent);font-size:0.7rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.tag{font-family:var(--font-m);font-size:0.63rem;padding:4px 10px;border-radius:4px;border:1px solid var(--border);color:var(--dim);letter-spacing:0.04em;transition:all .2s}
+.proj-card:hover .tag{border-color:var(--border2);color:var(--muted)}
+.card-link{font-family:var(--font-m);font-size:0.72rem;font-weight:500;color:var(--accent);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
+.card-link:hover{gap:14px}
 
-  /* ---------- SKILLS ---------- */
-  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:6px; overflow:hidden;}
-  .skill-block{background:var(--surface); padding:26px;}
-  .skill-block h4{
-    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--amber);
-    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px;
-  }
-  .skill-tags{display:flex; flex-wrap:wrap; gap:8px;}
-  .skill-tags span{
-    font-size:13.5px; color:var(--paper); border:1px solid var(--rule);
-    padding:5px 11px; border-radius:3px; background:var(--surface-2);
-  }
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.skill-grp{background:var(--surface);padding:34px;transition:background .2s}
+.skill-grp:hover{background:var(--surface2)}
+.skill-grp h4{font-family:var(--font-m);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.pill{font-size:0.8rem;padding:7px 15px;border-radius:6px;background:var(--bg2);color:var(--muted);border:1px solid var(--border);transition:all .2s;font-weight:500}
+.pill:hover{color:var(--text);border-color:var(--border2);background:rgba(79,126,255,0.06)}
 
-  /* ---------- CERTIFICATIONS ---------- */
-  .cert-list{display:flex; flex-direction:column; border:1px solid var(--rule); border-radius:6px; overflow:hidden;}
-  .cert-row{
-    display:grid; grid-template-columns:140px 1fr auto; gap:20px; align-items:center;
-    padding:20px 22px; border-bottom:1px solid var(--rule); background:var(--surface);
-    transition:background .2s;
-  }
-  .cert-row:last-child{border-bottom:none;}
-  .cert-row:hover{background:var(--surface-2);}
-  .cert-date{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--paper-dim);}
-  .cert-name{font-size:15px; color:var(--paper); font-weight:500;}
-  .cert-issuer{font-size:13px; color:var(--paper-dim); margin-top:2px;}
-  .cert-badge{
-    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--teal);
-    border:1px solid rgba(127,184,166,0.3); padding:4px 10px; border-radius:20px;
-    white-space:nowrap;
-  }
+/* ── CERTS ── */
+.certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r) var(--r) 0 0;overflow:hidden}
+.cert-card{background:var(--surface);padding:26px 30px;display:flex;align-items:flex-start;gap:16px;transition:background .2s}
+.cert-card:hover{background:var(--surface2)}
+.cert-ico{width:38px;height:38px;border-radius:8px;background:rgba(79,126,255,0.1);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;margin-top:2px}
+.cert-name{font-size:0.88rem;font-weight:600;color:var(--text);line-height:1.3}
+.cert-by{font-family:var(--font-m);font-size:0.68rem;color:var(--muted);margin-top:5px}
+.edu-blk{background:var(--surface);padding:30px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);position:relative;overflow:hidden}
+.edu-blk::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--accent),var(--accent2))}
+.edu-blk h4{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.edu-blk p{font-size:0.84rem;color:var(--muted)}
+.cgpa{font-family:var(--font-d);font-size:3.5rem;font-style:italic;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.cgpa-lbl{font-family:var(--font-m);font-size:0.62rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;text-align:right;margin-top:4px}
 
-  /* Education highlight */
-  .edu-card{
-    display:grid; grid-template-columns:1fr auto; gap:30px; align-items:center;
-    background:var(--surface); border:1px solid var(--rule); border-radius:6px;
-    padding:30px 32px; margin-top:24px;
-  }
-  .edu-card h4{font-family:'Fraunces',serif; font-size:20px; font-weight:600; margin-bottom:6px;}
-  .edu-card p{color:var(--paper-dim); font-size:14px;}
-  .edu-stat{text-align:right;}
-  .edu-stat .big{font-family:'Fraunces',serif; font-size:28px; color:var(--teal); font-weight:600;}
-  .edu-stat .small{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--paper-dim); text-transform:uppercase;}
+/* ── CONTACT ── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.contact-cta{background:linear-gradient(135deg,#1E1060 0%,#2D1B8E 40%,#4F3BD8 100%);padding:64px 52px;position:relative;overflow:hidden}
+.contact-cta::before{content:'';position:absolute;width:350px;height:350px;border-radius:50%;background:rgba(255,255,255,0.04);top:-120px;right:-80px}
+.contact-cta::after{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.03);bottom:-60px;left:30px}
+.contact-cta h2{font-family:var(--font-d);font-size:2.5rem;line-height:1.08;margin-bottom:18px;color:#fff;position:relative;z-index:1;font-style:italic}
+.contact-cta p{font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.75;position:relative;z-index:1}
+.contact-det{background:var(--surface);padding:64px 52px;display:flex;flex-direction:column;gap:30px}
+.ci h5{font-family:var(--font-m);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+.ci a,.ci p{font-size:0.95rem;color:var(--text);text-decoration:none;font-weight:500;transition:color .2s}
+.ci a:hover{color:var(--accent)}
+.ci-btns{display:flex;gap:10px;margin-top:4px;flex-wrap:wrap}
 
-  /* ---------- CONTACT ---------- */
-  .contact{border-top:1px solid var(--rule); text-align:center;}
-  .contact h2{
-    font-family:'Fraunces',serif; font-weight:600; font-size:clamp(30px,4.6vw,46px);
-    margin-bottom:18px;
-  }
-  .contact p.lead{color:var(--paper-dim); max-width:480px; margin:0 auto 36px; font-size:15.5px;}
-  .contact-grid{
-    display:flex; justify-content:center; gap:48px; flex-wrap:wrap; margin-bottom:40px;
-  }
-  .contact-item{text-align:left;}
-  .contact-item h5{
-    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--amber);
-    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;
-  }
-  .contact-item a, .contact-item span{font-size:15px; color:var(--paper);}
-  .contact-item a:hover{color:var(--teal);}
+/* ── FOOTER ── */
+footer{padding:24px clamp(20px,8vw,120px);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-family:var(--font-m);font-size:0.7rem;color:var(--dim);position:relative;z-index:10}
+footer a{color:var(--dim);text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--accent)}
 
-  footer{
-    border-top:1px solid var(--rule); padding:28px 0;
-    display:flex; justify-content:space-between; align-items:center;
-    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--paper-dim);
-  }
-  footer .nav-social a:hover{color:var(--amber);}
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
 
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width: 860px){
-    .hero-grid{grid-template-columns:1fr; gap:40px;}
-    .project-card{grid-template-columns:1fr;}
-    .project-visual{aspect-ratio:16/9;}
-    .skills-grid{grid-template-columns:1fr;}
-    .cert-row{grid-template-columns:1fr; text-align:left; gap:6px;}
-    .cert-badge{justify-self:start;}
-    .edu-card{grid-template-columns:1fr; text-align:left;}
-    .edu-stat{text-align:left;}
-    footer{flex-direction:column; gap:14px; text-align:center;}
-  }
-  @media (max-width:600px){
-    .nav-links{display:none;}
-    .hero{padding:64px 0 56px;}
-    section{padding:64px 0;}
-  }
-
-  a:focus-visible, button:focus-visible{
-    outline:2px solid var(--teal); outline-offset:3px;
-  }
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card.feat{flex-direction:column}
+  .proj-card.feat .card-img{width:100%;height:240px}
+  .full-row{flex-direction:column}
+  .full-row .card-img{width:100%;height:240px}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .certs-grid{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr}
+  .impact-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .stats-strip{grid-template-columns:repeat(2,1fr)}
+  nav .nav-btns{display:none}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .skills-grid{grid-template-columns:1fr}
+  .stats-strip{grid-template-columns:repeat(2,1fr)}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation:none!important;transition:none!important}
+}
 </style>
 </head>
-<body>
+<body id="top">
 
-<nav class="nav">
-  <div class="nav-inner wrap" style="padding-left:0; padding-right:0;">
-    <a href="#top" class="nav-mark"><span class="dot"></span> BHARGAV.PRASAD</a>
-    <div class="nav-links">
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="nav-social">
-      <a href="https://www.linkedin.com/in/bhargav-prasad-607025294" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zm13.5 12.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-11h2.88v1.5h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59v6.47z"/></svg>
-      </a>
-      <a href="https://github.com/Bhargavprasad66" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.63 0-12 5.37-12 12 0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.04-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.49 1 .11-.78.41-1.31.75-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4 1.02 0 2.04.13 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.6-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22 0 1.6-.02 2.89-.02 3.29 0 .32.22.7.83.58 4.76-1.6 8.19-6.09 8.19-11.39 0-6.63-5.37-12-12-12z"/></svg>
-      </a>
-    </div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#top" class="nav-logo"><span class="nav-dot"></span>bhargav.prasad</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-btns">
+    <a href="https://www.linkedin.com/in/bhargav-prasad-607025294" target="_blank" rel="noopener" class="nav-btn">LinkedIn</a>
+    <a href="https://github.com/Bhargavprasad66" target="_blank" rel="noopener" class="nav-btn">GitHub</a>
   </div>
 </nav>
 
-<header class="hero" id="top">
-  <div class="trace-wrap">
-    <svg viewBox="0 0 1080 400" preserveAspectRatio="none" width="100%" height="100%">
-      <polyline id="trace-path" points="0,320 90,300 180,330 270,260 360,280 450,180 540,210 630,140 720,170 810,90 900,120 990,60 1080,90" />
-      <polyline id="trace-path-2" points="0,360 100,355 200,340 300,345 400,300 500,310 600,250 700,260 800,200 900,210 1000,160 1080,170" />
-    </svg>
-  </div>
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">Data Analyst · Bangalore, India</span>
-      <h1 class="name">Munugala<br>Bhargav <em>Prasad</em></h1>
-      <p class="hero-desc">I turn raw, messy datasets into dashboards and decisions — using SQL, Power BI, and Python to find the signal in HR, healthcare, and banking data, and to help teams act on it before problems compound.</p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View Projects →</a>
-        <a href="assets/Bhargav_Prasad_Resume.pdf" target="_blank" rel="noopener" class="btn btn-ghost">Download Resume</a>
-      </div>
-    </div>
-    <div class="kpi-panel">
-      <div class="kpi-panel-head">
-        <span class="lights"><span></span><span></span><span></span></span>
-        career_snapshot.dashboard
-      </div>
-      <div class="kpi-grid">
-        <div class="kpi-cell">
-          <div class="kpi-num">100<span>K+</span></div>
-          <div class="kpi-label">Records analyzed</div>
-        </div>
-        <div class="kpi-cell">
-          <div class="kpi-num">4</div>
-          <div class="kpi-label">Domains covered</div>
-        </div>
-        <div class="kpi-cell">
-          <div class="kpi-num">3</div>
-          <div class="kpi-label">BI tools, one dataset</div>
-        </div>
-        <div class="kpi-cell">
-          <div class="kpi-num">6<span>+</span></div>
-          <div class="kpi-label">Certifications earned</div>
-        </div>
-      </div>
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <p class="hero-badge">Data Analyst · Bangalore, India · Open to Work</p>
+    <h1>
+      <span class="hero-name">Munugala<br>Bhargav Prasad</span>
+      <span class="h1-sub">Turning raw data into decisions that matter.</span>
+    </h1>
+    <p class="hero-desc">
+      I work with SQL, Power BI, and Python to find the patterns inside messy HR, healthcare, banking, and retail datasets — and package them as dashboards and insights teams can actually act on.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-p">View Projects →</a>
+      <a href="https://bhargavprasad66.github.io/Bhargav_Prasad_Resume.pdf" class="btn-g" target="_blank" rel="noopener">Download Resume</a>
     </div>
   </div>
-</header>
+  <div class="stats-strip">
+    <div class="stat"><div class="stat-num">100K+</div><div class="stat-lbl">Records analysed</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">End-to-end projects</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">BI tools mastered</div></div>
+    <div class="stat"><div class="stat-num">6+</div><div class="stat-lbl">Certifications</div></div>
+  </div>
+</section>
 
-<main>
+<hr class="divider"/>
 
-  <section class="projects" id="projects">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-num">01</span>
-        <h2 class="section-title">Selected Work</h2>
-        <div class="section-rule"></div>
-      </div>
-      <p class="section-intro">Four end-to-end analytics projects, each starting from raw operational data and ending in a decision someone could actually act on.</p>
-
-      <div class="project-card">
-        <div class="project-visual">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="38" stroke="#4A5568" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
-            <circle cx="32" cy="38" r="4" fill="#E8A04C"/>
-            <circle cx="62" cy="30" r="3" fill="#7FB8A6"/>
-            <circle cx="70" cy="58" r="5" fill="#7FB8A6"/>
-            <circle cx="40" cy="68" r="3.5" fill="#E8A04C"/>
-            <circle cx="55" cy="50" r="2.5" fill="#F3F1EA" opacity="0.7"/>
-            <line x1="32" y1="38" x2="55" y2="50" stroke="#4A5568" stroke-width="1"/>
-            <line x1="62" y1="30" x2="55" y2="50" stroke="#4A5568" stroke-width="1"/>
-            <line x1="70" y1="58" x2="55" y2="50" stroke="#4A5568" stroke-width="1"/>
-            <line x1="40" y1="68" x2="55" y2="50" stroke="#4A5568" stroke-width="1"/>
-          </svg>
-        </div>
-        <div>
-          <span class="dataset-tag">dataset: olist_brazilian_ecommerce</span>
-          <span class="featured-tag">★ Featured</span>
-          <h3>Olist E-Commerce Analytics — Multi-Tool BI</h3>
-          <p>End-to-end analysis of the Olist Brazilian e-commerce dataset spanning customers, orders, payments, reviews, products, sellers, and geolocation. Modeled and cleaned the full relational dataset, then built three parallel BI deliverables on top of it: a KPI-driven Excel dashboard, an interactive Tableau workbook, and a Power BI report.</p>
-          <p>The Excel build tracks total profit and payment value alongside a set of core KPIs; Tableau and Power BI each surface the same underlying story — order volume, revenue, delivery performance, and customer satisfaction — through different visualization and modeling approaches, including a recorded walkthrough of the findings.</p>
-          <div class="stack-row">
-            <span class="stack-chip">Excel</span>
-            <span class="stack-chip">Tableau</span>
-            <span class="stack-chip">Power BI</span>
-            <span class="stack-chip">Data Modeling</span>
-            <span class="stack-chip">KPI Design</span>
-          </div>
-          <div class="outcome-line"><span class="mark">→</span> One cleaned relational dataset powering three independent BI tools</div>
-          <div class="outcome-line"><span class="mark">→</span> Consistent KPI framework (profit, payment value, order metrics) across all three</div>
-          <a class="project-link" href="#" target="_blank" rel="noopener">View project ↗</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-visual">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="55" width="10" height="35" fill="#7FB8A6" opacity="0.8"/>
-            <rect x="24" y="40" width="10" height="50" fill="#7FB8A6" opacity="0.6"/>
-            <rect x="40" y="62" width="10" height="28" fill="#E8A04C" opacity="0.9"/>
-            <rect x="56" y="30" width="10" height="60" fill="#7FB8A6" opacity="0.5"/>
-            <rect x="72" y="48" width="10" height="42" fill="#E8A04C" opacity="0.7"/>
-            <line x1="5" y1="90" x2="90" y2="90" stroke="#4A5568" stroke-width="1"/>
-          </svg>
-        </div>
-        <div>
-          <span class="dataset-tag">dataset: hrms_employee_lifecycle</span>
-          <h3>HR Analytics — Employee Retention</h3>
-          <p>Built an end-to-end attrition pipeline from HRMS records, surveys, and performance data. Cleaned and standardized over 10,000 records, then segmented attrition drivers across location, department, compensation, and engagement using SQL.</p>
-          <p>Predictive models flagged at-risk employees early, shifting HR from reactive exits to proactive retention planning.</p>
-          <div class="stack-row">
-            <span class="stack-chip">SQL</span>
-            <span class="stack-chip">Power BI</span>
-            <span class="stack-chip">Azure AI</span>
-            <span class="stack-chip">EDA</span>
-          </div>
-          <div class="outcome-line"><span class="mark">→</span> 10,000+ records cleaned and segmented for attrition analysis</div>
-          <div class="outcome-line"><span class="mark">→</span> Predictive model surfaced "at-risk" employees ahead of exit</div>
-          <a class="project-link" href="https://github.com/Bhargavprasad66/hr-analytics/tree/main/HR-Analytics-main/HR-Analytics-Employee-Retention-main" target="_blank" rel="noopener">View repository ↗</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-visual">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="34" stroke="#7FB8A6" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
-            <path d="M50 16 A34 34 0 0 1 79 65" stroke="#E8A04C" stroke-width="3" fill="none"/>
-            <circle cx="50" cy="50" r="6" fill="#E8A04C"/>
-          </svg>
-        </div>
-        <div>
-          <span class="dataset-tag">dataset: hospital_admissions_50k</span>
-          <h3>Healthcare Analytics — Patient Outcomes</h3>
-          <p>Analyzed over 50,000 patient records to study readmission rates, emergency visits, and length of stay. Built Power BI dashboards used directly by hospital management, and ran correlation analysis between diagnosis type, treatment delay, and outcomes.</p>
-          <p>Findings exposed bottlenecks in discharge workflows and informed staffing changes in emergency departments.</p>
-          <div class="stack-row">
-            <span class="stack-chip">SQL</span>
-            <span class="stack-chip">Power BI</span>
-            <span class="stack-chip">Correlation Analysis</span>
-          </div>
-          <div class="outcome-line"><span class="mark">→</span> Reduced average length of stay by 1.2 days in high-traffic units</div>
-          <div class="outcome-line"><span class="mark">→</span> Enabled early flagging of readmission-risk patients via trend analysis</div>
-          <a class="project-link" href="https://github.com/Bhargavprasad66/health-care" target="_blank" rel="noopener">View repository ↗</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-visual">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="20" width="80" height="14" rx="2" fill="#1B2230" stroke="#4A5568"/>
-            <rect x="14" y="24" width="45" height="6" rx="1" fill="#7FB8A6"/>
-            <rect x="10" y="42" width="80" height="14" rx="2" fill="#1B2230" stroke="#4A5568"/>
-            <rect x="14" y="46" width="65" height="6" rx="1" fill="#E8A04C"/>
-            <rect x="10" y="64" width="80" height="14" rx="2" fill="#1B2230" stroke="#4A5568"/>
-            <rect x="14" y="68" width="30" height="6" rx="1" fill="#7FB8A6"/>
-          </svg>
-        </div>
-        <div>
-          <span class="dataset-tag">dataset: banking_transactions_loans</span>
-          <h3>Bank Analytics — Risk & Retention</h3>
-          <p>Worked with customer demographics, transaction history, and loan performance to build dashboards covering segmentation, default trends, and branch performance. EDA surfaced high-risk customers and unusual spending patterns tied to fraud.</p>
-          <p>KPI dashboards tracked CLV, delinquency rate, and NPA ratio, translating directly into credit scoring and targeted marketing decisions.</p>
-          <div class="stack-row">
-            <span class="stack-chip">SQL</span>
-            <span class="stack-chip">Power BI</span>
-            <span class="stack-chip">Risk Analysis</span>
-            <span class="stack-chip">Excel</span>
-          </div>
-          <div class="outcome-line"><span class="mark">→</span> Built KPI dashboards for CLV, NPA ratio, and loan delinquency</div>
-          <div class="outcome-line"><span class="mark">→</span> Flagged high-risk and fraud-pattern customers for review</div>
-          <a class="project-link" href="https://github.com/Bhargavprasad66/Bank-Analytics" target="_blank" rel="noopener">View repository ↗</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-num">02</span>
-        <h2 class="section-title">Toolkit</h2>
-        <div class="section-rule"></div>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-block">
-          <h4>Languages & Querying</h4>
-          <div class="skill-tags">
-            <span>SQL</span><span>Python</span><span>DAX</span>
-          </div>
-        </div>
-        <div class="skill-block">
-          <h4>Visualization & BI</h4>
-          <div class="skill-tags">
-            <span>Power BI</span><span>Tableau</span><span>Excel</span>
-          </div>
-        </div>
-        <div class="skill-block">
-          <h4>Methods</h4>
-          <div class="skill-tags">
-            <span>Data Munging</span><span>EDA</span><span>Predictive Modeling</span><span>Segmentation</span>
-          </div>
-        </div>
-        <div class="skill-block">
-          <h4>Platforms</h4>
-          <div class="skill-tags">
-            <span>Microsoft Azure AI</span><span>HRMS Systems</span>
-          </div>
-        </div>
-        <div class="skill-block">
-          <h4>Domains</h4>
-          <div class="skill-tags">
-            <span>E-Commerce</span><span>HR Analytics</span><span>Healthcare</span><span>Banking</span>
-          </div>
-        </div>
-        <div class="skill-block">
-          <h4>Foundations</h4>
-          <div class="skill-tags">
-            <span>Advanced Data Structures</span><span>Software Architecture</span>
-          </div>
-        </div>
+<!-- ABOUT -->
+<section class="sec reveal" id="about">
+  <p class="sec-eye">Who I am</p>
+  <h2 class="sec-ttl">A data analyst who<br>makes the <em>invisible visible</em></h2>
+  <p class="sec-sub">I turn raw operational data into strategic clarity — from 50K patient records to CEO-level retail dashboards.</p>
+  <div class="about-grid">
+    <div class="about-photo">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80" alt="Professional analyst portrait"/>
+      <div class="photo-overlay">
+        <p class="photo-tag">Available for hire</p>
+        <p class="photo-name">Bhargav<br>Prasad</p>
       </div>
     </div>
-  </section>
-
-  <section id="certifications">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-num">03</span>
-        <h2 class="section-title">Certifications & Education</h2>
-        <div class="section-rule"></div>
+    <div class="about-text">
+      <h3>From data chaos<br>to confident decisions</h3>
+      <p>I'm a Data Analyst based in Bangalore, specialising in building end-to-end analytics pipelines — from raw data ingestion and cleaning to executive-ready dashboards that leadership can act on immediately.</p>
+      <p>My work spans five industries: e-commerce, HR, healthcare, banking, and retail. Each project starts with the messiest version of the data and ends with the clearest possible story about what's happening and what to do next.</p>
+      <div class="about-facts">
+        <div class="fact"><div class="fact-lbl">Location</div><div class="fact-val">BTM Layout, Bangalore</div></div>
+        <div class="fact"><div class="fact-lbl">Education</div><div class="fact-val">BCA · Bangalore University</div></div>
+        <div class="fact"><div class="fact-lbl">Primary Tools</div><div class="fact-val">SQL · Power BI · Python</div></div>
+        <div class="fact"><div class="fact-lbl">Availability</div><div class="fact-val">Immediate · Full-time</div></div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="cert-list">
-        <div class="cert-row">
-          <span class="cert-date">2023–24</span>
-          <div>
-            <div class="cert-name">Microsoft Azure AI Fundamentals</div>
-            <div class="cert-issuer">Microsoft</div>
-          </div>
-          <span class="cert-badge">Certified</span>
+<hr class="divider"/>
+
+<!-- IMPACT -->
+<section class="sec reveal" id="impact">
+  <p class="sec-eye">Measurable results</p>
+  <h2 class="sec-ttl">Numbers that <em>moved the needle</em></h2>
+  <p class="sec-sub">Real outcomes from real projects — not hypotheticals.</p>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-num"><span class="hi">1.2</span> days</div>
+      <div class="impact-desc">Reduced average hospital length-of-stay through discharge workflow correlation analysis across 50,000+ patient records</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">$<span class="hi">78.4K</span></div>
+      <div class="impact-desc">Revenue tracked and segmented in the Starbucks 3-store pilot — surfaced channel gaps, loyalty opportunities, and an afternoon revenue dip pattern</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num"><span class="hi">10K+</span></div>
+      <div class="impact-desc">Employee records cleaned and fed into a predictive attrition model that flagged at-risk staff before they resigned</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section class="sec reveal" id="projects">
+  <p class="sec-eye">Selected work</p>
+  <h2 class="sec-ttl">End-to-end <em>analytics</em> projects</h2>
+  <p class="sec-sub">Five projects — each starting from raw operational data and ending in a decision someone could act on.</p>
+  <div class="proj-grid">
+
+    <!-- P1 featured -->
+    <article class="proj-card feat">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&auto=format&fit=crop&q=80" alt="E-commerce analytics" loading="lazy"/>
+      </div>
+      <div class="card-body">
+        <p class="card-lbl">dataset: olist_brazilian_ecommerce <span class="c-badge c-blue">★ Featured</span></p>
+        <h3>Olist E-Commerce Analytics — Multi-Tool BI</h3>
+        <p class="card-desc">End-to-end analysis of the Olist Brazilian e-commerce dataset spanning customers, orders, payments, reviews, products, sellers, and geolocation. Modeled and cleaned the full relational schema, then built consistent dashboards across three independent BI platforms from the same data source.</p>
+        <ul class="card-bullets">
+          <li>Single cleaned relational dataset powering Excel, Tableau, and Power BI simultaneously</li>
+          <li>Consistent KPI framework (profit, payment value, order metrics) validated across all three platforms</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Excel</span><span class="tag">Tableau</span><span class="tag">Power BI</span><span class="tag">Data Modeling</span><span class="tag">KPI Design</span>
         </div>
-        <div class="cert-row">
-          <span class="cert-date">2023–24</span>
-          <div>
-            <div class="cert-name">Data Analytics Job Simulation</div>
-            <div class="cert-issuer">KPMG</div>
-          </div>
-          <span class="cert-badge">Completed</span>
+        <a href="#" class="card-link">View project →</a>
+      </div>
+    </article>
+
+    <!-- P2 -->
+    <article class="proj-card">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=700&auto=format&fit=crop&q=80" alt="HR analytics" loading="lazy"/>
+      </div>
+      <div class="card-body">
+        <p class="card-lbl">dataset: hrms_employee_lifecycle</p>
+        <h3>HR Analytics — Employee Retention</h3>
+        <p class="card-desc">Built an end-to-end attrition pipeline from HRMS records, surveys, and performance data. Cleaned 10,000+ records, segmented attrition drivers, and built a predictive model to flag at-risk employees before exit.</p>
+        <ul class="card-bullets">
+          <li>10,000+ records cleaned and segmented across location, department, and tenure</li>
+          <li>Predictive model surfaced at-risk employees ahead of exit interviews</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Azure AI</span><span class="tag">EDA</span>
         </div>
-        <div class="cert-row">
-          <span class="cert-date">2023–24</span>
-          <div>
-            <div class="cert-name">Data Analytics Virtual Internship</div>
-            <div class="cert-issuer">Tata</div>
-          </div>
-          <span class="cert-badge">Completed</span>
+        <a href="https://github.com/Bhargavprasad66/hr-analytics/tree/main/HR-Analytics-main/HR-Analytics-Employee-Retention-main" class="card-link" target="_blank" rel="noopener">View repository →</a>
+      </div>
+    </article>
+
+    <!-- P3 -->
+    <article class="proj-card">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&auto=format&fit=crop&q=80" alt="Healthcare analytics" loading="lazy"/>
+      </div>
+      <div class="card-body">
+        <p class="card-lbl">dataset: hospital_admissions_50k</p>
+        <h3>Healthcare Analytics — Patient Outcomes</h3>
+        <p class="card-desc">Analysed 50,000+ patient records to study readmission rates, emergency visits, and length of stay. Built Power BI dashboards used directly by hospital management with discharge workflow correlation analysis.</p>
+        <ul class="card-bullets">
+          <li>Reduced average length of stay by 1.2 days in high-traffic units</li>
+          <li>Enabled early flagging of readmission-risk patients via trend analysis</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Correlation Analysis</span>
         </div>
-        <div class="cert-row">
-          <span class="cert-date">2023–24</span>
-          <div>
-            <div class="cert-name">Data Analytics & Visualization Job Simulation</div>
-            <div class="cert-issuer">Accenture</div>
-          </div>
-          <span class="cert-badge">Completed</span>
+        <a href="https://github.com/Bhargavprasad66/health-care" class="card-link" target="_blank" rel="noopener">View repository →</a>
+      </div>
+    </article>
+
+    <!-- P4 -->
+    <article class="proj-card">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=700&auto=format&fit=crop&q=80" alt="Banking risk analytics" loading="lazy"/>
+      </div>
+      <div class="card-body">
+        <p class="card-lbl">dataset: banking_transactions_loans</p>
+        <h3>Bank Analytics — Risk & Retention</h3>
+        <p class="card-desc">Built dashboards covering customer segmentation, loan default trends, and branch performance from transaction and demographics data. EDA surfaced high-risk segments and early fraud patterns for review.</p>
+        <ul class="card-bullets">
+          <li>KPI dashboards for CLV, NPA ratio, and loan delinquency built in Power BI</li>
+          <li>Flagged high-risk and fraud-pattern customers for proactive review</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Risk Analysis</span><span class="tag">Excel</span>
         </div>
-        <div class="cert-row">
-          <span class="cert-date">2023–24</span>
-          <div>
-            <div class="cert-name">Data Science & Analytics</div>
-            <div class="cert-issuer">ExcelR</div>
-          </div>
-          <span class="cert-badge">Certified</span>
+        <a href="https://github.com/Bhargavprasad66/Bank-Analytics" class="card-link" target="_blank" rel="noopener">View repository →</a>
+      </div>
+    </article>
+
+    <!-- P5 starbucks full width -->
+    <article class="proj-card full">
+      <div class="full-row">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" alt="Starbucks executive dashboard" loading="lazy" style="height:100%"/>
         </div>
-        <div class="cert-row">
-          <span class="cert-date">2023–24</span>
-          <div>
-            <div class="cert-name">Problem Solving (Basic)</div>
-            <div class="cert-issuer">HackerRank</div>
+        <div class="card-body">
+          <p class="card-lbl">dataset: starbucks_3store_pilot <span class="c-badge c-gold">☕ New</span></p>
+          <h3>Starbucks Executive Performance Dashboard</h3>
+          <p class="card-desc">CEO-level quarterly business review dashboard for a 3-store Starbucks pilot cluster — $78.4K in revenue across 9,936 transactions. Surfaced channel mix, afternoon revenue gap patterns, and a senior-customer loyalty opportunity. Delivered as an interactive HTML dashboard and executive PowerPoint deck.</p>
+          <ul class="card-bullets">
+            <li>Bakery drives 55% of all revenue ($43.4K) — identified as the core menu anchor</li>
+            <li>65–80 age group generates highest revenue band ($20.5K) — loyalty upsell opportunity flagged</li>
+            <li>Revenue gap at 1PM, 3PM, 5PM & 7PM identified for staffing investigation</li>
+            <li>Store revenue consistent within $0.03 — validated replicable model for expansion</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Excel / Charts</span><span class="tag">HTML Dashboard</span><span class="tag">PowerPoint</span><span class="tag">EDA</span><span class="tag">KPI Design</span><span class="tag">Retail Analytics</span>
           </div>
-          <span class="cert-badge">Certified</span>
+          <a href="Starbucks_Executive_Dashboard.html" class="card-link">View live dashboard →</a>
         </div>
       </div>
+    </article>
 
-      <div class="edu-card">
-        <div>
-          <h4>Bachelor of Computer Applications (CBCS)</h4>
-          <p>Bangalore University · First Class · Graduated August 2023</p>
-        </div>
-        <div class="edu-stat">
-          <div class="big">6.94</div>
-          <div class="small">CGPA</div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section class="sec reveal" id="skills">
+  <p class="sec-eye">Toolkit</p>
+  <h2 class="sec-ttl">What I <em>work with</em></h2>
+  <p class="sec-sub">A focused stack built around turning messy data into clear, actionable insights.</p>
+  <div class="skills-grid">
+    <div class="skill-grp"><h4>Languages & Querying</h4><div class="pills"><span class="pill">SQL</span><span class="pill">Python</span><span class="pill">DAX</span></div></div>
+    <div class="skill-grp"><h4>Visualization & BI</h4><div class="pills"><span class="pill">Power BI</span><span class="pill">Tableau</span><span class="pill">Excel</span><span class="pill">HTML Dashboards</span></div></div>
+    <div class="skill-grp"><h4>Methods</h4><div class="pills"><span class="pill">Data Munging</span><span class="pill">EDA</span><span class="pill">Predictive Modeling</span><span class="pill">Segmentation</span></div></div>
+    <div class="skill-grp"><h4>Platforms</h4><div class="pills"><span class="pill">Microsoft Azure AI</span><span class="pill">HRMS Systems</span></div></div>
+    <div class="skill-grp"><h4>Domains</h4><div class="pills"><span class="pill">E-Commerce</span><span class="pill">HR Analytics</span><span class="pill">Healthcare</span><span class="pill">Banking</span><span class="pill">Retail / F&B</span></div></div>
+    <div class="skill-grp"><h4>Foundations</h4><div class="pills"><span class="pill">Advanced Data Structures</span><span class="pill">Software Architecture</span></div></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CREDENTIALS -->
+<section class="sec reveal" id="credentials">
+  <p class="sec-eye">Credentials</p>
+  <h2 class="sec-ttl">Certifications & <em>Education</em></h2>
+  <p class="sec-sub">Six industry certifications and a computer science foundation from Bangalore University.</p>
+  <div class="certs-grid">
+    <div class="cert-card"><div class="cert-ico">☁️</div><div><div class="cert-name">Microsoft Azure AI Fundamentals</div><div class="cert-by">Microsoft · 2023–24 · Certified</div></div></div>
+    <div class="cert-card"><div class="cert-ico">📊</div><div><div class="cert-name">Data Analytics Job Simulation</div><div class="cert-by">KPMG · 2023–24 · Completed</div></div></div>
+    <div class="cert-card"><div class="cert-ico">💼</div><div><div class="cert-name">Data Analytics Virtual Internship</div><div class="cert-by">Tata · 2023–24 · Completed</div></div></div>
+    <div class="cert-card"><div class="cert-ico">🔷</div><div><div class="cert-name">Data Analytics & Visualisation Job Simulation</div><div class="cert-by">Accenture · 2023–24 · Completed</div></div></div>
+    <div class="cert-card"><div class="cert-ico">📈</div><div><div class="cert-name">Data Science & Analytics</div><div class="cert-by">ExcelR · 2023–24 · Certified</div></div></div>
+    <div class="cert-card"><div class="cert-ico">✅</div><div><div class="cert-name">Problem Solving (Basic)</div><div class="cert-by">HackerRank · 2023–24 · Certified</div></div></div>
+  </div>
+  <div class="edu-blk">
+    <div><h4>Bachelor of Computer Applications (CBCS)</h4><p>Bangalore University · First Class · Graduated August 2023</p></div>
+    <div><div class="cgpa">6.94</div><div class="cgpa-lbl">CGPA</div></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<section class="sec reveal" id="contact">
+  <p class="sec-eye">Get in touch</p>
+  <h2 class="sec-ttl">Ready to make <em>data work</em> for you</h2>
+  <p class="sec-sub">Open to analyst roles and freelance dashboard projects.</p>
+  <div class="contact-wrap">
+    <div class="contact-cta">
+      <h2>Let's work with data that means something.</h2>
+      <p>Open to Data Analyst roles and freelance dashboard work across any industry. The fastest way to reach me is email or LinkedIn — I typically respond within 24 hours.</p>
+    </div>
+    <div class="contact-det">
+      <div class="ci"><h5>Email</h5><a href="mailto:Bhargavprasad0609@gmail.com">Bhargavprasad0609@gmail.com</a></div>
+      <div class="ci"><h5>Phone</h5><a href="tel:+919666683688">+91 96666 83688</a></div>
+      <div class="ci"><h5>Location</h5><p>BTM Layout, Bangalore, KA 560087</p></div>
+      <div class="ci"><h5>Profiles</h5>
+        <div class="ci-btns">
+          <a href="https://www.linkedin.com/in/bhargav-prasad-607025294" target="_blank" rel="noopener" class="btn-g" style="font-size:0.76rem;padding:8px 18px">LinkedIn ↗</a>
+          <a href="https://github.com/Bhargavprasad66" target="_blank" rel="noopener" class="btn-g" style="font-size:0.76rem;padding:8px 18px">GitHub ↗</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <h2>Let's work with data<br>that means something.</h2>
-      <p class="lead">Open to Data Analyst roles and freelance dashboard work. The fastest way to reach me is email or LinkedIn.</p>
-      <div class="contact-grid">
-        <div class="contact-item">
-          <h5>Email</h5>
-          <a href="mailto:Bhargavprasad0609@gmail.com">Bhargavprasad0609@gmail.com</a>
-        </div>
-        <div class="contact-item">
-          <h5>Phone</h5>
-          <a href="tel:+919666683688">+91 96666 83688</a>
-        </div>
-        <div class="contact-item">
-          <h5>Location</h5>
-          <span>BTM Layout, Bangalore, KA 560087</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
+<!-- FOOTER -->
 <footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-    <span>© 2026 Munugala Bhargav Prasad</span>
-    <div class="nav-social" style="display:flex; gap:16px;">
-      <a href="https://www.linkedin.com/in/bhargav-prasad-607025294" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
-      <a href="https://github.com/Bhargavprasad66" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
-    </div>
+  <span>© 2026 Munugala Bhargav Prasad — Data Analyst</span>
+  <div style="display:flex;gap:20px">
+    <a href="https://www.linkedin.com/in/bhargav-prasad-607025294" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/Bhargavprasad66" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
 
+<script>
+/* ── LIVE PARTICLE / CONSTELLATION CANVAS ── */
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles, mouse = {x: -999, y: -999};
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function createParticles() {
+  const count = Math.floor((W * H) / 9000);
+  particles = Array.from({length: count}, () => ({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    r: Math.random() * 1.5 + 0.3,
+    alpha: Math.random() * 0.5 + 0.1,
+    color: Math.random() > 0.6 ? '99,139,255' : Math.random() > 0.5 ? '124,92,252' : '0,212,255'
+  }));
+}
+
+function drawFrame() {
+  ctx.clearRect(0, 0, W, H);
+  
+  // Ambient gradient blobs
+  const g1 = ctx.createRadialGradient(W * 0.75, H * 0.25, 0, W * 0.75, H * 0.25, W * 0.45);
+  g1.addColorStop(0, 'rgba(79,126,255,0.06)');
+  g1.addColorStop(1, 'transparent');
+  ctx.fillStyle = g1; ctx.fillRect(0, 0, W, H);
+  
+  const g2 = ctx.createRadialGradient(W * 0.1, H * 0.7, 0, W * 0.1, H * 0.7, W * 0.35);
+  g2.addColorStop(0, 'rgba(124,92,252,0.05)');
+  g2.addColorStop(1, 'transparent');
+  ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+
+  // Update + draw particles
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+    // mouse repel
+    const dx = p.x - mouse.x, dy = p.y - mouse.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 120) {
+      const force = (120 - dist) / 120 * 0.5;
+      p.x += (dx / dist) * force;
+      p.y += (dy / dist) * force;
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+    ctx.fill();
+
+    // Draw connections
+    for (let j = i + 1; j < particles.length; j++) {
+      const q = particles[j];
+      const ex = p.x - q.x, ey = p.y - q.y;
+      const ed = Math.sqrt(ex * ex + ey * ey);
+      if (ed < 140) {
+        const a = (1 - ed / 140) * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+        ctx.strokeStyle = `rgba(99,139,255,${a})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawFrame);
+}
+
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('resize', () => { resize(); createParticles(); });
+resize(); createParticles(); drawFrame();
+
+/* ── SCROLL REVEAL ── */
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold: 0.08 });
+reveals.forEach(el => ro.observe(el));
+
+/* ── STAT COUNTER ANIMATION ── */
+const statNums = document.querySelectorAll('.stat-num');
+statNums.forEach((el, i) => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(12px)';
+  setTimeout(() => {
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    el.style.opacity = '1'; el.style.transform = 'translateY(0)';
+  }, 700 + i * 120);
+});
+</script>
 </body>
 </html>
+HTMLEOF
+echo "Done"
+Output
