@@ -2,277 +2,320 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bhargav Prasad — Data Analyst Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bhargav Prasad — Data Analyst</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
+/* ================= BASE ================= */
 :root{
-  --bg:#0B0E14;
-  --card:#141926;
-  --text:#F3F1EA;
-  --muted:#A9AEBC;
-  --accent:#7FB8A6;
+  --bg:#0b0f17;
+  --card:#141b26;
+  --text:#e8edf5;
+  --muted:#9aa6b2;
+  --accent:#5eead4;
   --border:rgba(255,255,255,0.08);
 }
 
-body.light{
-  --bg:#f5f6fa;
-  --text:#111;
-  --muted:#444;
-  --card:#ffffff;
-  --border:rgba(0,0,0,0.1);
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
-*{margin:0;padding:0;box-sizing:border-box}
 body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter;
-  transition:.3s ease;
+  font-family:Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height:1.6;
+  overflow-x:hidden;
 }
 
-.wrap{max-width:1100px;margin:auto;padding:0 24px}
+a{text-decoration:none;color:inherit;}
 
-/* NAV */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ================= LIVE BACKGROUND ================= */
+body{
+  position: relative;
+}
+
+/* glowing blobs */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-20%;
+  z-index:-2;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(94,234,212,0.18), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(232,160,76,0.14), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(99,102,241,0.12), transparent 45%);
+
+  filter: blur(40px);
+  animation: floatGlow 14s ease-in-out infinite alternate;
+  transform: scale(1.1);
+}
+
+/* dark overlay */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background: rgba(11,15,23,0.72);
+}
+
+@keyframes floatGlow{
+  0%{transform:translate3d(0,0,0) scale(1.05);}
+  50%{transform:translate3d(-30px,20px,0) scale(1.1);}
+  100%{transform:translate3d(30px,-20px,0) scale(1.15);}
+}
+
+/* ================= NAV ================= */
 nav{
-  position:sticky;top:0;
-  background:var(--bg);
+  position:sticky;
+  top:0;
+  background:rgba(11,15,23,0.85);
+  backdrop-filter:blur(10px);
   border-bottom:1px solid var(--border);
-  z-index:10;
+  padding:14px 0;
 }
+
 .nav-inner{
   display:flex;
   justify-content:space-between;
-  padding:14px 0;
-  font-family:JetBrains Mono;
+  align-items:center;
 }
 
-button{
-  background:none;
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:6px 12px;
-  cursor:pointer;
-  border-radius:6px;
+.nav-links a{
+  margin-left:18px;
+  font-size:14px;
+  color:var(--muted);
 }
 
-/* HERO */
-.hero{padding:70px 0;border-bottom:1px solid var(--border)}
-h1{font-family:Fraunces;font-size:52px}
-.hero p{color:var(--muted);max-width:520px;margin-top:10px}
+.nav-links a:hover{color:var(--accent);}
 
-/* KPI */
-.kpi{
+/* ================= HERO ================= */
+.hero{
+  padding:80px 0;
+}
+
+.hero h1{
+  font-size:44px;
+  line-height:1.2;
+}
+
+.hero p{
+  margin-top:12px;
+  color:var(--muted);
+  max-width:650px;
+}
+
+/* ================= SECTION ================= */
+section{
+  padding:60px 0;
+}
+
+.section-title{
+  font-size:22px;
+  margin-bottom:20px;
+  border-left:3px solid var(--accent);
+  padding-left:10px;
+}
+
+/* ================= PROJECT ================= */
+.project{
   display:flex;
   gap:20px;
-  margin-top:30px;
-  flex-wrap:wrap;
-}
-.kpi-box{
   background:var(--card);
   border:1px solid var(--border);
-  padding:18px;
-  border-radius:10px;
-  min-width:140px;
-}
-.kpi-num{
-  font-size:28px;
-  font-weight:600;
-  color:var(--accent);
-}
-
-/* FILTER */
-.filters{
-  display:flex;
-  gap:10px;
-  margin-bottom:30px;
-  flex-wrap:wrap;
-}
-.filter-btn{
-  font-family:JetBrains Mono;
-  font-size:12px;
-  padding:6px 12px;
-  border:1px solid var(--border);
-  cursor:pointer;
-  border-radius:20px;
-}
-.filter-btn.active{
-  background:var(--accent);
-  color:#000;
-}
-
-/* PROJECT */
-.project{
-  display:grid;
-  grid-template-columns:1fr 1.5fr;
-  gap:28px;
-  margin-bottom:40px;
-  opacity:1;
-  transition:.4s ease;
-}
-
-.project.hide{
-  opacity:0;
-  transform:scale(0.95);
-  pointer-events:none;
-}
-
-.thumb{
-  border-radius:10px;
+  border-radius:12px;
   overflow:hidden;
-  border:1px solid var(--border);
-  cursor:pointer;
+  margin-bottom:20px;
 }
 
-.thumb img{
-  height:220px;
-  width:100%;
+.project img{
+  width:280px;
+  height:180px;
   object-fit:cover;
-  transition:.4s ease;
 }
 
-.thumb:hover img{transform:scale(1.08)}
+.project-content{
+  padding:16px;
+}
 
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.project h3{margin-bottom:8px;}
+
+.project p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.tags{margin:10px 0;}
+
 .tag{
-  font-family:JetBrains Mono;
-  font-size:11px;
-  padding:4px 10px;
+  display:inline-block;
+  font-size:12px;
+  padding:4px 8px;
   border:1px solid var(--border);
   border-radius:20px;
+  margin-right:6px;
+  color:var(--muted);
 }
 
-/* LIGHTBOX */
-#lightbox{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.9);
-  display:none;
-  align-items:center;
-  justify-content:center;
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 12px;
+  border:1px solid var(--accent);
+  border-radius:6px;
+  font-size:13px;
 }
-#lightbox.show{display:flex}
-#lightbox img{
-  max-width:90%;
-  max-height:80%;
-  border-radius:10px;
-  border:2px solid var(--accent);
+
+/* ================= SKILLS ================= */
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
 }
+
+.skills span{
+  background:var(--card);
+  padding:6px 10px;
+  border-radius:6px;
+  border:1px solid var(--border);
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* ================= CONTACT ================= */
+.contact{
+  text-align:center;
+}
+
+.contact p{
+  color:var(--muted);
+  margin-top:10px;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  padding:20px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+  margin-top:40px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+  .project{
+    flex-direction:column;
+  }
+
+  .project img{
+    width:100%;
+    height:200px;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="wrap nav-inner">
-    <div>BHARGAV.PRASAD</div>
-    <button onclick="toggleTheme()">Toggle Theme</button>
+  <div class="container nav-inner">
+    <strong>Bhargav Prasad</strong>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
 </nav>
 
-<header class="hero wrap">
-  <h1>Munugala Bhargav Prasad</h1>
-  <p>Data Analyst turning raw datasets into actionable dashboards.</p>
-
-  <div class="kpi">
-    <div class="kpi-box">
-      <div class="kpi-num" data-target="100">0</div>
-      Projects
-    </div>
-    <div class="kpi-box">
-      <div class="kpi-num" data-target="4">0</div>
-      Domains
-    </div>
-    <div class="kpi-box">
-      <div class="kpi-num" data-target="6">0</div>
-      Certs
-    </div>
-  </div>
+<!-- HERO -->
+<header class="hero container">
+  <h1>Data Analyst turning data into decisions.</h1>
+  <p>SQL, Power BI, Excel, and Python — building dashboards that help businesses understand what’s really happening inside their data.</p>
 </header>
 
-<section class="wrap">
-
-<h2>Projects</h2>
-
-<div class="filters">
-  <div class="filter-btn active" onclick="filter('all')">All</div>
-  <div class="filter-btn" onclick="filter('sql')">SQL</div>
-  <div class="filter-btn" onclick="filter('powerbi')">Power BI</div>
-  <div class="filter-btn" onclick="filter('excel')">Excel</div>
-</div>
-
 <!-- PROJECTS -->
+<section id="projects" class="container">
+  <h2 class="section-title">Projects</h2>
 
-<div class="project" data-tags="sql powerbi excel">
-  <div class="thumb"><img src="assets/projects/olist.jpg" onclick="openLightbox(this.src)"></div>
-  <div>
-    <h3>Olist E-Commerce Analytics</h3>
-    <div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span></div>
+  <div class="project">
+    <img src="assets/project1.jpg" alt="Project 1">
+    <div class="project-content">
+      <h3>Olist E-Commerce Analytics</h3>
+      <p>Built dashboards across Excel, Tableau, and Power BI to analyze revenue, orders, and customer behavior.</p>
+      <div class="tags">
+        <span class="tag">Power BI</span>
+        <span class="tag">Tableau</span>
+        <span class="tag">Excel</span>
+      </div>
+      <a class="btn" href="#">View Project</a>
+    </div>
   </div>
-</div>
 
-<div class="project" data-tags="sql powerbi">
-  <div class="thumb"><img src="assets/projects/hr.jpg" onclick="openLightbox(this.src)"></div>
-  <div>
-    <h3>HR Analytics</h3>
-    <div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span></div>
+  <div class="project">
+    <img src="assets/project2.jpg" alt="Project 2">
+    <div class="project-content">
+      <h3>HR Analytics — Employee Retention</h3>
+      <p>Attrition prediction using SQL + Power BI to identify employees at risk of leaving.</p>
+      <div class="tags">
+        <span class="tag">SQL</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">Python</span>
+      </div>
+      <a class="btn" href="#">View Project</a>
+    </div>
   </div>
-</div>
 
+  <div class="project">
+    <img src="assets/project3.jpg" alt="Project 3">
+    <div class="project-content">
+      <h3>Healthcare Analytics</h3>
+      <p>Analyzed 50K+ patient records to improve hospital workflows and reduce stay duration.</p>
+      <div class="tags">
+        <span class="tag">SQL</span>
+        <span class="tag">Power BI</span>
+      </div>
+      <a class="btn" href="#">View Project</a>
+    </div>
+  </div>
 </section>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="this.classList.remove('show')">
-  <img id="lightboxImg">
-</div>
+<!-- SKILLS -->
+<section id="skills" class="container">
+  <h2 class="section-title">Skills</h2>
+  <div class="skills">
+    <span>SQL</span>
+    <span>Power BI</span>
+    <span>Excel</span>
+    <span>Python</span>
+    <span>Tableau</span>
+    <span>Data Modeling</span>
+    <span>EDA</span>
+  </div>
+</section>
 
-<script>
+<!-- CONTACT -->
+<section id="contact" class="container contact">
+  <h2 class="section-title">Contact</h2>
+  <p>Email: Bhargavprasad0609@gmail.com</p>
+  <p>Phone: +91 96666 83688</p>
+</section>
 
-/* LIGHTBOX */
-function openLightbox(src){
-  document.getElementById("lightboxImg").src = src;
-  document.getElementById("lightbox").classList.add("show");
-}
-
-/* FILTER */
-function filter(tag){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-
-  document.querySelectorAll('.project').forEach(p=>{
-    if(tag==='all' || p.dataset.tags.includes(tag)){
-      p.classList.remove('hide');
-    }else{
-      p.classList.add('hide');
-    }
-  });
-}
-
-/* KPI COUNTER */
-const counters = document.querySelectorAll('.kpi-num');
-counters.forEach(counter=>{
-  const update = ()=>{
-    const target = +counter.dataset.target;
-    const current = +counter.innerText;
-    const step = target/40;
-    if(current < target){
-      counter.innerText = Math.ceil(current + step);
-      setTimeout(update,30);
-    }else{
-      counter.innerText = target;
-    }
-  }
-  update();
-});
-
-/* THEME */
-function toggleTheme(){
-  document.body.classList.toggle('light');
-}
-
-</script>
+<!-- FOOTER -->
+<footer>
+  © 2026 Bhargav Prasad — Data Analyst Portfolio
+</footer>
 
 </body>
 </html>
